@@ -1,4 +1,4 @@
-# go-whosonfirst-aceholder
+# go-whosonfirst-placeholder
 
 ## Tools
 
