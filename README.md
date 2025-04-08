@@ -2,7 +2,7 @@
 
 ## Important
 
-Work in progress. Document is incomplete.
+Work in progress. Documentation is incomplete. It may have bugs.
 
 ## Tools
 
@@ -63,6 +63,18 @@ Gowanus Heights
 
 took: 1.16ms
  - 102061079	neighbourhood 	Gowanus Heights
+```
+
+Or, to generate source data for a Placeholder instance for geocoding administrative and venue records in the San Francisco, San Mateo and Alameda counties:
+
+```
+$> ./bin/extract \
+	-iterator-uri 'repo://?exclude=properties.edtf:deprecated=.*&include=properties.wof:belongsto=(102087579|102085387|102086959)' \
+	/usr/local/data/whosonfirst-data-admin-us \
+	/usr/local/data/whosonfirst-data-venue-us-ca \
+	> /usr/local/src/placeholder/data/wof.extract
+	
+2025/04/07 17:10:05 INFO time to index paths (2) 2m5.602572958s
 ```
 
 ## See also
