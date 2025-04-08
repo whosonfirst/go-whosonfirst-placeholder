@@ -15,6 +15,19 @@ go build -mod vendor -ldflags="-s -w" -o bin/extract cmd/extract/main.go
 
 Extract generates a Placeholder `wof.extract` (JSONL) file from one or more [whosonfirst/go-whosonfirst-iterate](https://github.com/whosonfirst/go-whosonfirst-iterate) sources.
 
+```
+$> ./bin/extract -h
+Extract generates a Placeholder `wof.extract` (JSONL) file from one or more whosonfirst/go-whosonfirst-iterate sources.
+Usage:
+	./bin/extract [options] uri(N) uri(N)
+  -iterator-uri string
+    	A registered whosonfirst/go-whosonfirst-iterate emitter URI. (default "repo://?exclude=properties.edtf:deprecated=.*")
+  -verbose
+    	Enable verbose (debug) logging.
+```
+
+#### Example
+
 For example, to generate source data for a Placeholder instance for geocoding administrative and venue records in the US:
 
 ```
@@ -75,6 +88,35 @@ $> ./bin/extract \
 	> /usr/local/src/placeholder/data/wof.extract
 	
 2025/04/07 17:10:05 INFO time to index paths (2) 2m5.602572958s
+```
+
+#### Iterator sources
+
+By default only iterator (emitter, actually) sources provided by the [whosonfirst/go-whosonfirst-iterate](https://github.com/whosonfirst/go-whosonfirst-iterate?tab=readme-ov-file#uris-and-schemes-for-emitters) package are supported.
+
+In order to enable other iterators (emitters) you will need to clone the [cmd/extract/main.go](cmd/extract/main.go) tool and add the relevant import statement. For example this is how you would enable support for the [whosonfirst/go-whosonfirst-iterate-git](https://github.com/whosonfirst/go-whosonfirst-iterate-git) package:
+
+```
+package main
+
+import (
+	"context"
+	"log"
+
+	_ "github.com/whosonfirst/go-whosonfirst-iterate-git"
+	
+	"github.com/whosonfirst/go-whosonfirst-placeholder/app/extract"
+)
+
+func main() {
+
+	ctx := context.Background()
+	err := extract.Run(ctx)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+}
 ```
 
 ## See also
