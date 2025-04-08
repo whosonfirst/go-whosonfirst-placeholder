@@ -3,14 +3,16 @@ module github.com/whosonfirst/go-whosonfirst-placeholder
 go 1.24.2
 
 require (
-	github.com/aaronland/go-jsonl v0.0.23
+	github.com/aaronland/go-jsonl v0.1.0
+	github.com/sfomuseum/go-flags v0.10.0
 	github.com/tidwall/gjson v1.18.0
 	github.com/whosonfirst/go-whosonfirst-iterate/v2 v2.5.0
 )
 
 require (
-	github.com/aaronland/go-json-query v0.1.5 // indirect
+	github.com/aaronland/go-json-query v0.1.6 // indirect
 	github.com/aaronland/go-roster v1.0.0 // indirect
+	github.com/aaronland/gocloud-blob v0.4.2 // indirect
 	github.com/golang/groupcache v0.0.0-20241129210726-2c02b8208cf8 // indirect
 	github.com/googleapis/gax-go/v2 v2.14.1 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
