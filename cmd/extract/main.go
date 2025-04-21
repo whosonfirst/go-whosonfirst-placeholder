@@ -4,6 +4,8 @@ import (
 	"context"
 	"log"
 
+	_ "github.com/whosonfirst/go-whosonfirst-iterate-organization/v2"
+	
 	"github.com/whosonfirst/go-whosonfirst-placeholder/app/extract"
 )
 
