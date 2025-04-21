@@ -83,7 +83,7 @@ func main() {
 			props, ok := gjson.ParseBytes(rec.Body).Value().(map[string]interface{})
 
 			if !ok {
-				log.Fatal("Failed to parse JSON for record at line %d", rec.LineNumber)
+				log.Fatalf("Failed to parse JSON for record at line %d", rec.LineNumber)
 			}
 
 			for k, _ := range props {
