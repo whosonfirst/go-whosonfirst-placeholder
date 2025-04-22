@@ -22,14 +22,12 @@ Iterate over all the [sfomuseum-data/sfomuseum-data-flights-*](https://github.co
 package main
 
 import (
-	_ "github.com/whosonfirst/go-whosonfirst-iterate-organization/v2"
-)
-
-import (
 	"context"
 	"io"
 	"fmt"
 	"testing"
+
+	_ "github.com/whosonfirst/go-whosonfirst-iterate-organization/v2"
 	
 	"github.com/whosonfirst/go-whosonfirst-iterate/v2/iterator"
 )

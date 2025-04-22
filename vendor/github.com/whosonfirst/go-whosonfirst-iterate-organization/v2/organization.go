@@ -3,11 +3,14 @@ package organization
 import (
 	"context"
 	"fmt"
+	"io"
+	"log/slog"
 	"net/url"
 	"strconv"
+	"sync"
 
 	_ "github.com/whosonfirst/go-whosonfirst-iterate-git/v2"
-	
+
 	"github.com/whosonfirst/go-whosonfirst-github/organizations"
 	"github.com/whosonfirst/go-whosonfirst-iterate/v2/emitter"
 	"github.com/whosonfirst/go-whosonfirst-iterate/v2/iterator"
@@ -23,6 +26,8 @@ type OrganizationEmitter struct {
 	emitter.Emitter
 	target string
 	query  url.Values
+	dedupe bool
+	lookup *sync.Map
 }
 
 // NewOrganizationEmitter returns a new `OrganizationEmitter` configured by 'uri' which takes the form
@@ -47,6 +52,20 @@ func NewOrganizationEmitter(ctx context.Context, uri string) (emitter.Emitter, e
 	em := &OrganizationEmitter{
 		target: u.Path,
 		query:  q,
+	}
+
+	if q.Has("_dedupe") {
+
+		v, err := strconv.ParseBool(q.Get("_dedupe"))
+
+		if err != nil {
+			return nil, fmt.Errorf("Failed to parse '?_dedupe=' parameter, %w", err)
+		}
+
+		if v {
+			em.lookup = new(sync.Map)
+			em.dedupe = v
+		}
 	}
 
 	return em, nil
@@ -149,12 +168,35 @@ func (em *OrganizationEmitter) WalkURI(ctx context.Context, cb emitter.EmitterCa
 		iter_q.Set("_retry_after", strconv.Itoa(retry_after))
 	}
 
+	// To do: Add support for go-whosonfirst-iterate-github
+	// https://github.com/whosonfirst/go-whosonfirst-iterate-organization/issues/2
+	
 	iterator_uri := url.URL{}
 	iterator_uri.Scheme = "git"
 	iterator_uri.Path = em.target
 	iterator_uri.RawQuery = iter_q.Encode()
 
-	iter, err := iterator.NewIterator(ctx, iterator_uri.String(), cb)
+	iter_cb := cb
+
+	if em.dedupe {
+
+		iter_cb = func(ctx context.Context, path string, r io.ReadSeeker, args ...interface{}) error {
+
+			if em.dedupe {
+
+				_, exists := em.lookup.LoadOrStore(path, true)
+
+				if exists {
+					slog.Debug("Skip record because duplicate", "path", path)
+					return nil
+				}
+			}
+
+			return cb(ctx, path, r, args...)
+		}
+	}
+
+	iter, err := iterator.NewIterator(ctx, iterator_uri.String(), iter_cb)
 
 	if err != nil {
 		return fmt.Errorf("Failed to create new iterator, %w", err)

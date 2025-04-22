@@ -2,7 +2,9 @@
 
 DATABASE=/data/placeholder/store.sqlite3
 
-/usr/local/bin/wof-extract-properties -iterator-uri 'org:///tmp?exclude=properties.edtf:deprecated=.*' $@ > ${DATABASE}
+ITERATOR_URI=org:///tmp?_exclude_alt=true&exclude=properties.edtf:deprecated=.*&dedupe=true
+
+/usr/local/bin/wof-extract-properties -iterator-uri "${ITERATOR_URI}" $@ > ${DATABASE}
 
 cd /code/pelias/placeholder
 npm run build
