@@ -20,6 +20,8 @@ $> ./bin/extract -h
 Extract generates a Placeholder `wof.extract` (JSONL) file from one or more whosonfirst/go-whosonfirst-iterate sources.
 Usage:
 	./bin/extract [options] uri(N) uri(N)
+  -access-token string
+    	An optional GitHub API access token. If not-empty it will be used to replace any instances of the string "{access_token}" in any iteraror source URIs
   -iterator-uri string
     	A registered whosonfirst/go-whosonfirst-iterate emitter URI. (default "repo://?exclude=properties.edtf:deprecated=.*")
   -verbose
