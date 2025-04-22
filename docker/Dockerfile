@@ -13,6 +13,7 @@ RUN cd /build \
 FROM pelias/baseimage
 
 COPY --from=gotools /usr/local/bin/wof-extract-properties /usr/local/bin/wof-extract-properties
+COPY build-placeholder-db.sh /usr/local/bin/build-placeholder-db.sh
 
 # downloader apt dependencies
 # note: this is done in one command in order to keep down the size of intermediate containers
