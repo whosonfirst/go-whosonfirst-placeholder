@@ -1,8 +1,6 @@
 # go-whosonfirst-placeholder
 
-## Important
-
-Work in progress. Documentation is incomplete. It may have bugs.
+Go package for building custom [pelias/placeholder](https://github.com/pelias/placeholder/) SQLite databases from one or more Who's On First (style) data sources.
 
 ## Tools
 
@@ -94,9 +92,13 @@ $> ./bin/extract \
 
 #### Iterator sources
 
-By default only iterator (emitter, actually) sources provided by the [whosonfirst/go-whosonfirst-iterate](https://github.com/whosonfirst/go-whosonfirst-iterate?tab=readme-ov-file#uris-and-schemes-for-emitters) package are supported.
+The following iterator (emitter, actually) sources are enabled by default:
 
-In order to enable other iterators (emitters) you will need to clone the [cmd/extract/main.go](cmd/extract/main.go) tool and add the relevant import statement. For example this is how you would enable support for the [whosonfirst/go-whosonfirst-iterate-git](https://github.com/whosonfirst/go-whosonfirst-iterate-git) package:
+* All of those provided by the [whosonfirst/go-whosonfirst-iterate](https://github.com/whosonfirst/go-whosonfirst-iterate?tab=readme-ov-file#uris-and-schemes-for-emitters) package.
+* [whosonfirst/go-whosonfirst-iterate-git](https://github.com/whosonfirst/go-whosonfirst-iterate-git), for iterating documents in one or more Git repositories
+* [whosonfirst/go-whosonfirst-iterate-organization](https://github.com/whosonfirst/go-whosonfirst-iterate-organization), for iterating documents in a set of (Git) repositories in one or more GitHub organizations.
+
+In order to enable other iterators (emitters) you will need to clone the [cmd/extract/main.go](cmd/extract/main.go) tool and add the relevant import statement. For example this is how you would enable support for the [whosonfirst/go-whosonfirst-iterate-bucket](https://github.com/whosonfirst/go-whosonfirst-iterate-bucket) package:
 
 ```
 package main
@@ -105,7 +107,7 @@ import (
 	"context"
 	"log"
 
-	_ "github.com/whosonfirst/go-whosonfirst-iterate-git"
+	_ "github.com/whosonfirst/go-whosonfirst-iterate-bucket"
 	
 	"github.com/whosonfirst/go-whosonfirst-placeholder/app/extract"
 )
@@ -121,7 +123,13 @@ func main() {
 }
 ```
 
+## Docker
+
+Consult [docker/README.md](docker/README.md) for details.
+
 ## See also
 
 * https://github.com/pelias/placeholder/
 * https://github.com/whosonfirst/go-whosonfirst-iterate
+* https://github.com/whosonfirst/go-whosonfirst-iterate-git
+* https://github.com/whosonfirst/go-whosonfirst-iterate-organization
