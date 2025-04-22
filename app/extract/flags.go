@@ -9,6 +9,8 @@ import (
 )
 
 var iterator_uri string
+var access_token string
+
 var verbose bool
 
 func DefaultFlagSet() *flag.FlagSet {
@@ -16,6 +18,7 @@ func DefaultFlagSet() *flag.FlagSet {
 	fs := flagset.NewFlagSet("extract")
 
 	fs.StringVar(&iterator_uri, "iterator-uri", "repo://?exclude=properties.edtf:deprecated=.*", "A registered whosonfirst/go-whosonfirst-iterate emitter URI.")
+	fs.StringVar(&access_token, "access-token", "", "An optional GitHub API access token. If not-empty it will be used to replace any instances of the string \"{access_token}\" in any iteraror source URIs")
 	fs.BoolVar(&verbose, "verbose", false, "Enable verbose (debug) logging.")
 
 	fs.Usage = func() {

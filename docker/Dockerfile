@@ -1,0 +1,31 @@
+FROM golang:1.24-alpine AS gotools
+
+RUN mkdir /build
+
+RUN apk update && apk upgrade && apk add git
+
+RUN cd /build \
+    && git clone https://github.com/whosonfirst/go-whosonfirst-placeholder.git \
+    && cd go-whosonfirst-placeholder \
+    && go build -mod vendor -ldflags="-s -w" -o /usr/local/bin/wof-extract-properties cmd/extract/main.go 
+
+# https://github.com/pelias/docker-baseimage/blob/master/Dockerfile
+FROM pelias/baseimage
+
+COPY --from=gotools /usr/local/bin/wof-extract-properties /usr/local/bin/wof-extract-properties
+COPY build-placeholder-db.sh /usr/local/bin/build-placeholder-db.sh
+
+# downloader apt dependencies
+# note: this is done in one command in order to keep down the size of intermediate containers
+RUN apt-get update && apt-get install -y jq lbzip2 parallel git wget && rm -rf /var/lib/apt/lists/*
+
+# Install placeholder
+
+RUN mkdir -p /code/pelias/
+
+RUN git clone https://github.com/pelias/placeholder.git /code/pelias/placeholder \
+    && cd /code/pelias/placeholder \
+    && npm install
+
+RUN mkdir -p /data/placeholder
+RUN chown pelias /data/placeholder
