@@ -9,10 +9,16 @@ RUN cd /build \
     && cd go-whosonfirst-placeholder \
     && go build -mod vendor -ldflags="-s -w" -o /usr/local/bin/wof-extract-properties cmd/extract/main.go 
 
+RUN cd /build \
+    && git clone https://github.com/aaronland/gocloud-blob.git \
+    && cd gocloud-blob \
+    && go build -mod vendor -ldflags="-s -w" -o /usr/local/bin/copy cmd/copy/main.go 
+
 # https://github.com/pelias/docker-baseimage/blob/master/Dockerfile
 FROM pelias/baseimage
 
 COPY --from=gotools /usr/local/bin/wof-extract-properties /usr/local/bin/wof-extract-properties
+COPY --from=gotools /usr/local/bin/copy /usr/local/bin/copy
 COPY build-placeholder-db.sh /usr/local/bin/build-placeholder-db.sh
 
 # downloader apt dependencies
