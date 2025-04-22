@@ -1,17 +1,18 @@
 #!/bin/sh
 
-DATABASE=/data/placeholder/store.sqlite3
+PLACEHOLDER="/code/pelias/placeholder"
+DATA="${PLACEHOLDER}/data"
+
+EXTRACT="${DATA}/wof.extract"
+DATABASE="${DATA}/store.sqlite3"
+
 TARGET=
-ACCESS_TOKEN=
 
-ITERATOR_URI=org:///tmp?_exclude_alt=true&exclude=properties.edtf:deprecated=.*&dedupe=true
+ITERATOR_URI="org:///tmp?_dedupe=true&_exclude_alt=true&exclude=properties.edtf:deprecated=.*"
 
-while getopts "A:T:" opt; do
+while getopts "T:" opt; do
     # echo "-$opt = $OPTARG"
     case "$opt" in
-	A)
-	    ACCCESS_TOKEN=$OPTARGS
-	    ;;
 	T)
 	    TARGET=$OPTARG
 	    ;;
@@ -24,10 +25,29 @@ done
 shift $((OPTIND-1))
 SOURCES=$@
 
-/usr/local/bin/wof-extract-properties -iterator-uri "${ITERATOR_URI}" -access-token "${ACCESS_TOKEN}" ${SOURCES} > ${DATABASE}
-# echo /usr/local/bin/wof-extract-properties -iterator-uri "${ITERATOR_URI}" -access-token "${ACCESS_TOKEN}" ${SOURCES} 
+echo /usr/local/bin/wof-extract-properties -iterator-uri "${ITERATOR_URI}" ${SOURCES} ">" ${EXTRACT}
+/usr/local/bin/wof-extract-properties -iterator-uri "${ITERATOR_URI}" ${SOURCES} > ${EXTRACT}
 
+if [ "$?" -ne 0 ]; then
+    echo "wof-extract-properties exited with non-zero status"
+    exit 1;
+fi
+
+echo "build database"
 cd /code/pelias/placeholder
 npm run build
 
-/usr/local/bin/copy file://${DATABASE} ${TARGET}
+if [ "$?" -ne 0 ]; then
+    echo "build command exited with non-zero status"
+    exit 1;
+fi
+
+echo /usr/local/bin/copy -source file://${DATABASE} -target ${TARGET}
+/usr/local/bin/copy -source file://${DATABASE} -target ${TARGET}
+
+if [ "$?" -ne 0 ]; then
+    echo "copy exited with non-zero status"
+    exit 1;
+fi
+
+exit 0;

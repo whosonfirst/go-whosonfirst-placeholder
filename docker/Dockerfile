@@ -33,5 +33,4 @@ RUN git clone https://github.com/pelias/placeholder.git /code/pelias/placeholder
     && cd /code/pelias/placeholder \
     && npm install
 
-RUN mkdir -p /data/placeholder
-RUN chown pelias /data/placeholder
+RUN mkdir -p /code/pelias/placeholder/data
