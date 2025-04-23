@@ -6,7 +6,7 @@ require (
 	github.com/aaronland/go-jsonl v0.1.0
 	github.com/sfomuseum/go-flags v0.10.0
 	github.com/tidwall/gjson v1.18.0
-	github.com/whosonfirst/go-whosonfirst-iterate-organization/v2 v2.1.0
+	github.com/whosonfirst/go-whosonfirst-iterate-organization/v2 v2.2.0
 	github.com/whosonfirst/go-whosonfirst-iterate/v2 v2.6.0
 )
 
@@ -37,7 +37,7 @@ require (
 	github.com/whosonfirst/go-ioutil v1.0.2 // indirect
 	github.com/whosonfirst/go-whosonfirst-crawl v0.2.2 // indirect
 	github.com/whosonfirst/go-whosonfirst-github v0.8.2 // indirect
-	github.com/whosonfirst/go-whosonfirst-iterate-git/v2 v2.1.10 // indirect
+	github.com/whosonfirst/go-whosonfirst-iterate-git/v2 v2.2.0 // indirect
 	github.com/whosonfirst/go-whosonfirst-sources v0.1.0 // indirect
 	github.com/whosonfirst/go-whosonfirst-uri v1.3.0 // indirect
 	github.com/whosonfirst/walk v0.0.2 // indirect

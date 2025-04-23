@@ -25,8 +25,8 @@ done
 shift $((OPTIND-1))
 SOURCES=$@
 
-echo /usr/local/bin/wof-extract-properties -iterator-uri "${ITERATOR_URI}" ${SOURCES} ">" ${EXTRACT}
-/usr/local/bin/wof-extract-properties -iterator-uri "${ITERATOR_URI}" ${SOURCES} > ${EXTRACT}
+echo /usr/local/bin/wof-extract-properties -verbose -iterator-uri "${ITERATOR_URI}" ${SOURCES} ">" ${EXTRACT}
+/usr/local/bin/wof-extract-properties -verbose -iterator-uri "${ITERATOR_URI}" ${SOURCES} > ${EXTRACT}
 
 if [ "$?" -ne 0 ]; then
     echo "wof-extract-properties exited with non-zero status"
