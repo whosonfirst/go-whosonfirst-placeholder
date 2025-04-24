@@ -8,7 +8,7 @@ DATABASE="${DATA}/store.sqlite3"
 
 TARGET=
 
-ITERATOR_URI="org:///tmp?_dedupe=true&_exclude_alt=true&exclude=properties.edtf:deprecated=.*"
+ITERATOR_URI="org:///tmp?dedupe=true&_exclude_alt=true&exclude=properties.edtf:deprecated=.*"
 
 while getopts "T:" opt; do
     # echo "-$opt = $OPTARG"
