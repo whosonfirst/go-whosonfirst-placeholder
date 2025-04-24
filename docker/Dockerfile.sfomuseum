@@ -29,10 +29,8 @@ RUN apt-get update && apt-get install -y jq lbzip2 parallel git wget && rm -rf /
 
 RUN mkdir -p /code/pelias/
 
-RUN git clone https://github.com/sfomuseum/placeholder.git /code/pelias/placeholder \
+RUN git clone -b sfomuseum-all https://github.com/sfomuseum/placeholder.git /code/pelias/placeholder \
     && cd /code/pelias/placeholder \
-    && git fetch -a \
-    && git checkout sfomuseum-all \
     && npm install
 
 RUN mkdir -p /code/pelias/placeholder/data
