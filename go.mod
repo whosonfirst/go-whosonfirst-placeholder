@@ -6,8 +6,8 @@ require (
 	github.com/aaronland/go-jsonl v0.1.0
 	github.com/sfomuseum/go-flags v0.10.0
 	github.com/tidwall/gjson v1.18.0
-	github.com/whosonfirst/go-whosonfirst-iterate-organization/v2 v2.2.0
-	github.com/whosonfirst/go-whosonfirst-iterate/v2 v2.6.0
+	github.com/whosonfirst/go-whosonfirst-iterate-organization/v2 v2.2.1
+	github.com/whosonfirst/go-whosonfirst-iterate/v2 v2.7.1
 )
 
 require (

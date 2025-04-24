@@ -222,10 +222,10 @@ github.com/whosonfirst/go-whosonfirst-github v0.8.2 h1:PIBW+RFlpYwyyZ/LmcoiTAust
 github.com/whosonfirst/go-whosonfirst-github v0.8.2/go.mod h1:7EqcBWFYc94pEbU8CrmfeazahIJjar1KMx69IESBxQ4=
 github.com/whosonfirst/go-whosonfirst-iterate-git/v2 v2.2.0 h1:UVKCZtgKsrFDcb2wLJOAVvb9jF8o64MwrSwwSC/TAKg=
 github.com/whosonfirst/go-whosonfirst-iterate-git/v2 v2.2.0/go.mod h1:g4+hVBYSo3mFO0eurMTAzqdK1Idr0MaTPmui2zgjgAY=
-github.com/whosonfirst/go-whosonfirst-iterate-organization/v2 v2.2.0 h1:O+HSav9eNwJt8wL1zoTdId7ifOJKKj9q7Vu7ulE9mGw=
-github.com/whosonfirst/go-whosonfirst-iterate-organization/v2 v2.2.0/go.mod h1:Os3q+R8XYled2zrBbxZx+jPRr43d5lpjTU2UX1aggv4=
-github.com/whosonfirst/go-whosonfirst-iterate/v2 v2.6.0 h1:OXff9nyzeqixQz1/VjyKqqJaE/8VgEi3rGH+Sa5Ku+Y=
-github.com/whosonfirst/go-whosonfirst-iterate/v2 v2.6.0/go.mod h1:BNuQWh/bfXq3IeUTeaxXTUkgr2Wt7jo90JrXL7eoSdk=
+github.com/whosonfirst/go-whosonfirst-iterate-organization/v2 v2.2.1 h1:V+KKNmCwgYJmf0TCI2SajBIgK8quYER9jxt6Q561Cww=
+github.com/whosonfirst/go-whosonfirst-iterate-organization/v2 v2.2.1/go.mod h1:zAfeT0HCtgJcYD0PzqfnrVkyaoopNKD/NXayNWOXQm4=
+github.com/whosonfirst/go-whosonfirst-iterate/v2 v2.7.1 h1:XZHxEGI/Y6/Gi81H9pBmXGWQbyH4g1AxRNKZxi/Ag6E=
+github.com/whosonfirst/go-whosonfirst-iterate/v2 v2.7.1/go.mod h1:BNuQWh/bfXq3IeUTeaxXTUkgr2Wt7jo90JrXL7eoSdk=
 github.com/whosonfirst/go-whosonfirst-sources v0.1.0 h1:JuKLa6KWke22jBfJ1pM9WQHoz1/3pbDv2C+aR+THPPQ=
 github.com/whosonfirst/go-whosonfirst-sources v0.1.0/go.mod h1:EUMHyGzUmqPPxlMmOp+28BFeoBdxxE0HCKRd67lkqGM=
 github.com/whosonfirst/go-whosonfirst-uri v1.3.0 h1:LYOVLqP9rWQxauYVkdw65j5LZxEi8OK0GHh/qCEpX4g=
