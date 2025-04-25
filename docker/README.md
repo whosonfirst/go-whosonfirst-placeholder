@@ -25,7 +25,7 @@ $> docker run --platform=linux/amd64 placeholder-custom-db \
 	'sfomuseum-data://?prefix=sfomuseum-data-architecture' \
 	'whosonfirst-data://?prefix=whosonfirst-data-admin-us'
 
-/usr/local/bin/wof-extract-properties -iterator-uri org:///tmp?_dedupe=true&_exclude_alt=true&exclude=properties.edtf:deprecated=.* sfomuseum-data://?prefix=sfomuseum-data-architecture whosonfirst-data://?prefix=whosonfirst-data-admin-us > /code/pelias/placeholder/data/wof.extract
+/usr/local/bin/wof-extract-properties -iterator-uri org:///tmp?dedupe=true&_exclude_alt=true&exclude=properties.edtf:deprecated=.* sfomuseum-data://?prefix=sfomuseum-data-architecture whosonfirst-data://?prefix=whosonfirst-data-admin-us > /code/pelias/placeholder/data/wof.extract
 2025/04/22 22:16:46 INFO time to index paths (1) 5.11158821s
 2025/04/22 22:26:28 INFO time to index paths (1) 9m40.539258724s
 2025/04/22 22:26:28 INFO time to index paths (2) 9m48.501629602s
@@ -56,6 +56,15 @@ The details of "somewhere else" are defined by the target URI. The following `go
 * [file://](https://gocloud.dev/howto/blob/#local)
 * [s3://](https://gocloud.dev/howto/blob/#s3)
 * [s3blob://](https://github.com/aaronland/gocloud-blob/tree/main/s3)
+
+## Dockerfile.sfomuseum
+
+There is also a [Dockerfile.sfomuseum](Dockerfile.sfomuseum) build file (and a corresponding `docker-sfomuseum` Makefile target) which can be used to create a container which uses the `sfomuseum-all` branch of the [sfomuseum/placeholder](https://github.com/sfomuseum/placeholder/tree/sfomuseum-all) package. This package introduces two important changes from the main `pelias/placeholder` codebase:
+
+1. It enables indexing of Who's On First (WOF) records regardless of their `mz:is_current` flag (but which still have NOT been marked as deprecated).
+2. It enables indexing of WOF records which have been superseded.
+
+These changes are necessary in order to build a Placeholder (SQLite) database with support for historical records.
 
 ## See also
 
