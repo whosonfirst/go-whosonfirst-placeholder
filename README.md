@@ -2,6 +2,10 @@
 
 Go package for building custom [pelias/placeholder](https://github.com/pelias/placeholder/) SQLite databases from one or more Who's On First (style) data sources.
 
+##  Motivation
+
+Have a look at the [ Building a custom Placeholder geocoding database ](https://millsfield.sfomuseum.org/blog/2025/04/28/placeholder-custom/) blog post.
+
 ## Tools
 
 ```
